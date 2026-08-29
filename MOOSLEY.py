@@ -123,6 +123,97 @@ elements = {
 
 }
 
+
+# ======================================================
+# AAS ABSORPTION SPECTRAL DATABASE
+# ======================================================
+
+aas_spectra = {
+
+    "H": [656.3, 486.1, 434.0],
+
+    "He": [447.1, 501.6, 587.6, 667.8],
+
+    "Li": [610.4, 670.8],
+
+    "Be": [234.9, 313.0],
+
+    "B": [249.7],
+
+    "C": [193.1, 247.9],
+
+    "N": [149.3],
+
+    "O": [130.2],
+
+    "F": [95.0],
+
+    "Ne": [585.2, 640.2],
+
+    "Na": [589.0, 589.6]
+}
+# ======================================================
+# ATOMIC EMISSION SPECTRAL DATABASE
+# ======================================================
+
+emission_spectra = {
+
+    "H": {
+        "lines": [410.2, 434.0, 486.1, 656.3],
+        "color": "violet"
+    },
+
+    "He": {
+        "lines": [447.1, 501.6, 587.6, 667.8],
+        "color": "orange"
+    },
+
+    "Li": {
+        "lines": [610.4, 670.8],
+        "color": "red"
+    },
+
+    "Be": {
+        "lines": [457.3, 469.9],
+        "color": "cyan"
+    },
+
+    "B": {
+        "lines": [412.2, 420.1],
+        "color": "green"
+    },
+
+    "C": {
+        "lines": [426.7, 658.8],
+        "color": "blue"
+    },
+
+    "N": {
+        "lines": [500.5, 567.9],
+        "color": "purple"
+    },
+
+    "O": {
+        "lines": [557.7, 630.0],
+        "color": "lime"
+    },
+
+    "F": {
+        "lines": [685.6],
+        "color": "pink"
+    },
+
+    "Ne": {
+        "lines": [540.1, 585.2, 640.2],
+        "color": "orange"
+    },
+
+    "Na": {
+        "lines": [589.0, 589.6],
+        "color": "gold"
+    }
+
+}
 # ======================================================
 # ======================================================
 # ORBITAL INFORMATION ENGINE
@@ -457,39 +548,91 @@ def draw_orbital_cloud(orbital):
 
     elif orbital == "3pz":
 
-        theta = np.random.uniform(
-            0,
-            2*np.pi,
-            N
-        )
+     theta = np.random.uniform(0, 2*np.pi, N)
 
-        r = np.random.normal(
-            1.8,
-            0.35,
-            N
-        )
+     r = np.random.normal(1.8, 0.35, N)
 
-        x = r * np.cos(theta)
-        y = r * np.sin(theta)
+     x = r*np.cos(theta)
+     y = r*np.sin(theta)
 
-        mask = np.sqrt(x**2 + y**2) > 1.2
+     mask = np.sqrt(x**2 + y**2) > 1.2
 
-        ax.scatter(
-            x[mask],
-            y[mask],
-            s=2,
-            color="orange",
-            alpha=0.18
-        )
+     ax.scatter(
+        x[mask],
+        y[mask],
+        s=2,
+        color="orange",
+        alpha=0.18
+    )
 
-        ax.text(
-            0,
-            3.3,
-            "Projection of 3pz",
-            fontsize=10,
-            ha="center"
-        )
-    
+     ax.text(
+        0,
+        3.3,
+        "Projection of 3pz",
+        fontsize=10,
+        ha="center"
+    )
+
+    elif orbital == "3dxy":
+
+     N = 6000
+
+     r = np.random.normal(2.0, 0.30, N)
+
+     theta = np.random.uniform(0, 2*np.pi, N)
+
+    # Four lobes between axes
+     x = r * np.cos(theta) * np.sin(2 * theta)
+     y = r * np.sin(theta) * np.sin(2 * theta)
+
+     mask = np.sqrt(x**2 + y**2) > 0.5
+
+     ax.scatter(
+        x[mask],
+        y[mask],
+        s=2,
+        color="deepskyblue",
+        alpha=0.18
+    )
+
+     ax.text(
+        0,
+        3.5,
+        "Projection of 3dxy",
+        fontsize=10,
+        ha="center"
+    )
+
+    elif orbital == "3dx²-y²":
+
+     N = 7000
+
+     theta = np.random.uniform(0, 2*np.pi, N)
+
+     r = np.random.normal(2.0, 0.30, N)
+
+    # Four lobes along x and y axes
+     x = r * np.cos(theta) * np.cos(2 * theta)
+     y = r * np.sin(theta) * np.cos(2 * theta)
+
+     mask = np.sqrt(x**2 + y**2) > 0.5
+
+     ax.scatter(
+        x[mask],
+        y[mask],
+        s=2,
+        color="crimson",
+        alpha=0.18
+    )
+
+     ax.text(
+        0,
+        3.5,
+        "Projection of 3d(x²−y²)",
+        fontsize=10,
+        ha="center"
+    )
+  
 # Bohr ENGINE
 # ======================================================
 def shell_configuration(Z):
@@ -2343,54 +2486,7 @@ Electronic Configuration :
             "3dx²-y²",
             "3dz²",
 
-            "4s",
-            "4px",
-            "4py",
-            "4pz",
-            "4dxy",
-            "4dyz",
-            "4dxz",
-            "4dx²-y²",
-            "4dz²",
-            "4f1",
-            "4f2",
-            "4f3",
-            "4f4",
-            "4f5",
-            "4f6",
-            "4f7",
-
-            "5s",
-            "5px",
-            "5py",
-            "5pz",
-            "5dxy",
-            "5dyz",
-            "5dxz",
-            "5dx²-y²",
-            "5dz²",
-            "5f1",
-            "5f2",
-            "5f3",
-            "5f4",
-            "5f5",
-            "5f6",
-            "5f7",
-
-            "6s",
-            "6px",
-            "6py",
-            "6pz",
-            "6dxy",
-            "6dyz",
-            "6dxz",
-            "6dx²-y²",
-            "6dz²",
-
-            "7s",
-            "7px",
-            "7py",
-            "7pz"
+           
         ]
     )
 
@@ -2433,10 +2529,411 @@ Total Nodes : {info['total']}
 
 with tab4:
 
-    st.subheader("Spectroscopy")
+    st.header("📈 Spectroscopy")
 
-    st.info("Emission and absorption spectra will appear here.")
+    st.markdown("""
+Spectroscopy is one of the most powerful experimental techniques used to identify
+elements. Every element possesses a unique spectral fingerprint because its
+electrons can occupy only specific energy levels.
 
+When electrons move between these energy levels, they absorb or emit photons
+of characteristic wavelengths. By analysing these wavelengths, scientists can
+identify the element present in a sample.
+""")
+
+    st.divider()
+
+    spectroscopy = st.selectbox(
+    "Select Spectroscopic Technique",
+    [
+        "Atomic Emission Spectroscopy (AES)",
+        "Atomic Absorption Spectroscopy (AAS)",
+        "X-ray Fluorescence (XRF)",
+        "Energy Dispersive X-ray Spectroscopy (EDS)",
+        "X-ray Photoelectron Spectroscopy (XPS)"
+    ]
+)
+
+st.divider()
+
+if spectroscopy == "Atomic Emission Spectroscopy (AES)":
+
+    st.header("🔬 Atomic Emission Spectroscopy Laboratory")
+
+    st.write("""
+Atomic Emission Spectroscopy identifies elements by analysing the light
+emitted when excited electrons return to lower energy levels.
+
+Every element produces a unique emission spectrum which acts as its
+optical fingerprint.
+""")
+
+    st.divider()
+
+    st.subheader("🧪 Selected Sample")
+
+    st.success(f"{element['Name']} ({selected})")
+
+    st.divider()
+
+    st.subheader("Experimental Setup")
+
+    st.code("""
+⚡ Excitation Source
+        │
+        ▼
+🧪 Atomic Sample
+        │
+        ▼
+🔍 Spectrometer
+        │
+        ▼
+💻 Detector
+        │
+        ▼
+📈 Emission Spectrum
+""")
+
+    st.divider()
+
+    if st.button("▶ Start Atomic Emission Experiment"):
+
+        status = st.empty()
+
+        messages = [
+            "Loading sample...",
+            "Applying excitation energy...",
+            "Electrons are being excited...",
+            "Electron transitions occurring...",
+            "Photons emitted...",
+            "Collecting emitted light...",
+            "Spectrometer analysing wavelengths...",
+            "Building emission spectrum..."
+        ]
+
+        for message in messages:
+
+            status.info(message)
+
+            time.sleep(0.8)
+
+        status.success("Experiment Completed Successfully!")
+
+        st.divider()
+
+        st.subheader("📈 Live Emission Spectrum")
+
+        fig, ax = plt.subplots(figsize=(12, 2))
+
+        ax.set_xlim(380, 750)
+        ax.set_ylim(0, 1)
+        ax.set_xlabel("Wavelength (nm)")
+        ax.set_yticks([])
+
+        placeholder = st.empty()
+
+        spectrum = emission_spectra[selected]
+
+        for wavelength in spectrum["lines"]:
+
+            ax.vlines(
+                wavelength,
+                0,
+                1,
+                color=spectrum["color"],
+                linewidth=3
+            )
+
+            placeholder.pyplot(fig)
+
+            time.sleep(0.8)
+
+        st.divider()
+
+        st.subheader("Observed Spectral Lines")
+
+        for wavelength in spectrum["lines"]:
+
+            st.write(f"• {wavelength:.1f} nm")
+
+        st.divider()
+
+        st.subheader("Scientific Interpretation")
+
+        st.success(
+            f"""
+The observed emission wavelengths match the
+reference Atomic Emission Spectrum of
+{element['Name']} ({selected}).
+
+Conclusion:
+
+The analysed sample is identified as
+{element['Name']} because its characteristic
+emission spectrum agrees with the
+reference database.
+"""
+        )
+        
+
+elif spectroscopy == "Atomic Absorption Spectroscopy (AAS)":
+
+    st.header("🔬 Atomic Absorption Spectroscopy Laboratory")
+
+    st.write("""
+Atomic Absorption Spectroscopy (AAS) identifies elements by measuring
+the absorption of characteristic wavelengths of radiation by
+ground-state atoms.
+
+The absorbed wavelengths appear as dark lines within a continuous
+spectrum.
+""")
+
+    st.divider()
+
+    # ==================================================
+    # SELECTED SAMPLE
+    # ==================================================
+
+    st.subheader("🧪 Selected Sample")
+
+    st.success(
+        f"{element['Name']} ({selected}) sample loaded"
+    )
+
+    st.divider()
+
+    # ==================================================
+    # EXPERIMENTAL SETUP
+    # ==================================================
+
+    st.subheader("🔬 Experimental Setup")
+
+    st.code("""
+💡 Hollow Cathode Lamp
+        │
+        ▼
+🔥 Atomizer / Flame
+        │
+        ▼
+🧪 Ground-State Atoms
+        │
+        ▼
+🔍 Monochromator
+        │
+        ▼
+📡 Detector
+        │
+        ▼
+🌈⚫ Absorption Spectrum
+""")
+
+    st.divider()
+
+    # ==================================================
+    # START EXPERIMENT
+    # ==================================================
+
+    if st.button("▶ Start AAS Experiment"):
+
+        status = st.empty()
+
+        messages = [
+
+            "Preparing hollow cathode lamp...",
+
+            "Loading selected element...",
+
+            "Atomizing the sample...",
+
+            "Producing ground-state atoms...",
+
+            "Radiation passing through the atomic vapour...",
+
+            "Atoms absorbing characteristic wavelengths...",
+
+            "Detector measuring transmitted intensity...",
+
+            "Building absorption spectrum..."
+
+        ]
+
+        for message in messages:
+
+            status.info(message)
+
+            time.sleep(0.7)
+
+        status.success(
+            "AAS Experiment Completed Successfully!"
+        )
+
+        st.divider()
+
+        # ==================================================
+        # LIVE ABSORPTION SPECTRUM
+        # ==================================================
+
+        st.subheader("📉 Live AAS Absorption Spectrum")
+
+        # Visible wavelength range
+        wavelengths = np.linspace(380, 750, 1200)
+
+        # Create continuous spectrum
+        spectrum = np.ones_like(wavelengths)
+
+        # Create figure
+        fig, ax = plt.subplots(figsize=(12, 3))
+
+        # --------------------------------------------------
+        # Continuous coloured spectrum
+        # --------------------------------------------------
+
+        for i in range(len(wavelengths) - 1):
+
+            ax.axvspan(
+                wavelengths[i],
+                wavelengths[i + 1],
+                color=plt.cm.hsv(
+                    (wavelengths[i] - 380) / (750 - 380)
+                ),
+                linewidth=0
+            )
+
+        # --------------------------------------------------
+        # Axis
+        # --------------------------------------------------
+
+        ax.set_xlim(380, 750)
+
+        ax.set_ylim(0, 1)
+
+        ax.set_xlabel("Wavelength (nm)")
+
+        ax.set_ylabel("Transmitted Light")
+
+        ax.set_yticks([])
+
+        # --------------------------------------------------
+        # Black absorption lines
+        # --------------------------------------------------
+
+        absorption_lines = aas_spectra.get(
+            selected,
+            []
+        )
+
+        visible_lines = [
+            line
+            for line in absorption_lines
+            if 380 <= line <= 750
+        ]
+
+        placeholder = st.empty()
+
+        # Draw spectrum first
+        placeholder.pyplot(fig)
+
+        time.sleep(0.8)
+
+        # --------------------------------------------------
+        # Add absorption lines one by one
+        # --------------------------------------------------
+
+        for wavelength in visible_lines:
+
+            ax.axvline(
+                wavelength,
+                color="black",
+                linewidth=3
+            )
+
+            placeholder.pyplot(fig)
+
+            time.sleep(0.8)
+
+        st.divider()
+
+        # ==================================================
+        # OBSERVED LINES
+        # ==================================================
+
+        st.subheader("⚫ Observed Absorption Lines")
+
+        if visible_lines:
+
+            for wavelength in visible_lines:
+
+                st.write(
+                    f"• {wavelength:.1f} nm"
+                )
+
+        else:
+
+            st.info(
+                "The characteristic lines for this element "
+                "are outside the visible range shown here."
+            )
+
+        st.divider()
+
+        # ==================================================
+        # SCIENTIFIC INTERPRETATION
+        # ==================================================
+
+        st.subheader("🔬 Scientific Interpretation")
+
+        if visible_lines:
+
+            st.success(
+                f"""
+The absorption spectrum of {element['Name']} ({selected})
+contains characteristic absorption lines at:
+
+{", ".join(f"{x:.1f} nm" for x in visible_lines)}
+
+These wavelengths correspond to transitions involving
+the electronic structure of the selected element.
+
+The characteristic absorption pattern provides an
+element-specific analytical fingerprint.
+"""
+            )
+
+        else:
+
+            st.info(
+                f"""
+The selected element is {element['Name']} ({selected}).
+
+Its characteristic absorption wavelengths included
+in the current database lie outside the visible
+380–750 nm display range.
+
+A future UV/extended-range detector module can
+display these lines.
+"""
+            )
+
+        # AAS spectrum will be added here
+
+    elif spectroscopy == "X-ray Fluorescence (XRF)":
+
+        st.subheader("X-ray Fluorescence")
+
+        st.info("Characteristic X-ray spectrum coming soon.")
+
+    elif spectroscopy == "Energy Dispersive X-ray Spectroscopy (EDS)":
+
+        st.subheader("Energy Dispersive X-ray Spectroscopy")
+
+        st.info("Elemental composition analysis coming soon.")
+
+    elif spectroscopy == "X-ray Photoelectron Spectroscopy (XPS)":
+
+        st.subheader("X-ray Photoelectron Spectroscopy")
+
+        st.info("Binding energy spectrum coming soon.")
 # ======================================================
 # TAB 5
 # ======================================================
